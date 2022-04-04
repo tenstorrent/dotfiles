@@ -15,7 +15,9 @@ do_install() {
 
 	info "[bat] Install ${BAT_VERSION}"
 	local bat=/tmp/bat.deb
-	download "https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat_${BAT_VERSION}_amd64.deb" "${bat}"
+	ARCH=`dpkg --print-architecture`
+	echo ARCH=$ARCH
+	download "https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat_${BAT_VERSION}_${ARCH}.deb" "${bat}"
 	sudo dpkg -i "${bat}"
 }
 

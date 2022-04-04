@@ -15,7 +15,9 @@ do_install() {
 
 	info "[lsd] Install"
 	local lsd=/tmp/lsd.deb
-	download "https://github.com/Peltoche/lsd/releases/download/${LSD_VERSION}/lsd_${LSD_VERSION}_amd64.deb" "${lsd}"
+	ARCH=`dpkg --print-architecture`
+	echo ARCH=$ARCH
+	download "https://github.com/Peltoche/lsd/releases/download/${LSD_VERSION}/lsd_${LSD_VERSION}_${ARCH}.deb" "${lsd}"
 	sudo dpkg -i "${lsd}"
 }
 

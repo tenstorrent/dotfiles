@@ -17,17 +17,9 @@ git: ## Configure git
 gnome-terminal: ## Install themes for gnome-terminal
 	@./scripts/gnome-terminal.sh configure
 
-languages: go rust lua node ## Install programming languages
-go: ## Install Go
-	@./scripts/go.sh install
-rust: ## Install Rust
-	@./scripts/rust.sh install
-lua: ## Install Lua
+languages: lua ## Install programming languages
+lua: ## Install Lua -- required by neovim
 	@./scripts/lua.sh install
-node: nvm ## Install Node.js
-	@./scripts/node.sh install
-nvm: ## Install Node version manager
-	@./scripts/nvm.sh install
 
 terminal: tmux zsh ohmyzsh fzf ## Setup the terminal
 tmux: ## Configure tmux
@@ -42,7 +34,7 @@ ohmyzsh-configure: ## Configure Oh My Zsh
 fzf: ## Install FZF
 	@./scripts/fzf.sh install
 
-tools: lsd bat tig jqp
+tools: lsd bat 
 lsd: ## Install lsd
 	@./scripts/lsd.sh install
 bat: bat-install bat-configure ## Install and configure bat
@@ -50,10 +42,6 @@ bat-install: ## Install bat
 	@./scripts/bat.sh install
 bat-configure: ## Configure bat
 	@./scripts/bat.sh configure
-tig: ## Configure tig
-	@./scripts/tig.sh configure
-jqp: ## Install jqp
-	@./scripts/jqp.sh install
 
 neovim: tree-sitter ## Configure neovim
 	@./scripts/neovim.sh configure

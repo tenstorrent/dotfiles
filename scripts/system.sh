@@ -16,7 +16,6 @@ do_install() {
 		fontconfig
 		git
 		htop
-		httpie
 		jq
 		libreadline-dev
 		moreutils
@@ -26,7 +25,6 @@ do_install() {
 		python3-pip
 		ripgrep
 		shellcheck
-		tig
 		tmux
 		tree
 		units

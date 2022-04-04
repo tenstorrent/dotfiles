@@ -26,44 +26,6 @@ do_configure() {
 	info "[neovim][configure] Install the neovim package for languages"
 	info "[neovim][configure][languages] Python"
 	python3 -m pip install --quiet neovim neovim-remote --user
-
-	info "[neovim][configure][languages] Node.js"
-	# shellcheck source=../../.nvm/nvm.sh
-	source "${NVM_DIR}/nvm.sh" && npm install --quiet -g neovim
-
-	info "[neovim][configure] Install dependencies for LSP"
-	info "[neovim][configure][dependencies] yarn"
-	# shellcheck source=../../.nvm/nvm.sh
-	source "${NVM_DIR}/nvm.sh"
-	npm install --quiet -g yarn
-
-	info "[neovim][configure] Install linters for LSP"
-
-	info "[neovim][configure][linters] markdownlint-cli"
-	npm install --quiet -g markdownlint-cli
-
-	info "[neovim][configure][linters] hadolint"
-	asset=$(curl --silent "https://api.github.com/repos/hadolint/hadolint/releases/latest" | jq -r '.assets // [] | .[] | select(.name | startswith("hadolint-Linux")) | .url')
-	local hadolint="${HOME}/bin/hadolint"
-	download "${asset}" "${hadolint}"
-	chmod +x "${hadolint}"
-
-	info "[neovim][configure][linters] stylua"
-	asset=$(curl --silent "https://api.github.com/repos/JohnnyMorganz/StyLua/releases/latest" | jq -r '.assets // [] | .[] | select(.name | contains("linux")) | .url')
-	if [[ -z $asset ]]; then
-		warn "Cannot find a release. Please try again later."
-	else
-		local stylua="${HOME}/bin/stylua"
-		download "${asset}" "" | gunzip -c >"${stylua}"
-		chmod +x "${stylua}"
-	fi
-
-	info "[neovim][configure][linters] shfmt"
-	/usr/local/go/bin/go install mvdan.cc/sh/v3/cmd/shfmt@latest
-
-	info "[neovim][configure][linters] golangci-lint"
-	/usr/local/go/bin/go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-	ln -fs "$(pwd)/golangci-lint/golangci.yml" "${HOME}/.golangci.yml"
 }
 
 main() {
